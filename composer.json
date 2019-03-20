@@ -18,7 +18,7 @@
   "require": {
     "php": "^7.2",
     "roave/security-advisories": "dev-master",
-    "event-engine/php-messaging": "dev-master"
+    "event-engine/php-messaging": "^0.1"
   },
   "require-dev": {
     "phpunit/phpunit": "^7.0",
