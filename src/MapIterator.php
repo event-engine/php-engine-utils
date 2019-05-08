@@ -11,26 +11,36 @@ declare(strict_types=1);
 
 namespace EventEngine\Util;
 
-final class MapIterator implements \IteratorAggregate
+use Traversable;
+
+final class MapIterator extends \IteratorIterator
 {
     /**
      * @var callable
      */
     private $callback;
 
-    private $iterator;
-
-    public function __construct(\Traversable $iterator, callable $callback)
+    public function __construct(Traversable $iterator, callable $callback)
     {
+        parent::__construct($this->getIterator($iterator));
         $this->callback = $callback;
-        $this->iterator = $iterator;
     }
 
-    public function getIterator()
+    public function current()
+    {
+        return \call_user_func($this->callback, parent::current());
+    }
+
+    public function valid()
+    {
+        return parent::getInnerIterator()->valid();
+    }
+
+    private function getIterator(\Traversable $iterator): \Generator
     {
         $cb = $this->callback;
 
-        foreach ($this->iterator as $k => $v) {
+        foreach ($iterator as $k => $v) {
             yield $k => $cb($v);
         }
     }
