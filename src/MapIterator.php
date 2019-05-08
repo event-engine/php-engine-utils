@@ -22,13 +22,8 @@ final class MapIterator extends \IteratorIterator
 
     public function __construct(Traversable $iterator, callable $callback)
     {
-        parent::__construct($this->getIterator($iterator));
         $this->callback = $callback;
-    }
-
-    public function current()
-    {
-        return \call_user_func($this->callback, parent::current());
+        parent::__construct($this->getIterator($iterator));
     }
 
     public function valid()
