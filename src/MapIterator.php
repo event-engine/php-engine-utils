@@ -15,28 +15,13 @@ use Traversable;
 
 final class MapIterator extends \IteratorIterator
 {
-    /**
-     * @var callable
-     */
-    private $callback;
-
     public function __construct(Traversable $iterator, callable $callback)
     {
-        $this->callback = $callback;
-        parent::__construct($this->getIterator($iterator));
+        parent::__construct(new MapTraversable($iterator, $callback));
     }
 
     public function valid()
     {
         return parent::getInnerIterator()->valid();
-    }
-
-    private function getIterator(\Traversable $iterator): \Generator
-    {
-        $cb = $this->callback;
-
-        foreach ($iterator as $k => $v) {
-            yield $k => $cb($v);
-        }
     }
 }
