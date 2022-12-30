@@ -46,7 +46,7 @@ final class MapTraversable implements \Iterator
     /**
      * @inheritDoc
      */
-    public function current()
+    public function current(): mixed
     {
         return $this->innerGenerator->current();
     }
@@ -54,7 +54,7 @@ final class MapTraversable implements \Iterator
     /**
      * @inheritDoc
      */
-    public function next()
+    public function next(): void
     {
         $this->innerGenerator->next();
     }
@@ -62,7 +62,7 @@ final class MapTraversable implements \Iterator
     /**
      * @inheritDoc
      */
-    public function key()
+    public function key(): mixed
     {
         return $this->innerGenerator->key();
     }
@@ -70,7 +70,7 @@ final class MapTraversable implements \Iterator
     /**
      * @inheritDoc
      */
-    public function valid()
+    public function valid(): bool
     {
         return $this->innerGenerator->valid();
     }
@@ -78,7 +78,7 @@ final class MapTraversable implements \Iterator
     /**
      * @inheritDoc
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->generateGenerator();
     }
