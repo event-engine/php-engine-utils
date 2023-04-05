@@ -20,7 +20,7 @@ final class MapIterator extends \IteratorIterator
         parent::__construct(new MapTraversable($iterator, $callback));
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return parent::getInnerIterator()->valid();
     }
